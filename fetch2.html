@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Digite o numero ou o nome do pokemon" id="pokemon">
+    <button onclick="pegarpokemon()">Buscar</button>
+    <div>Nome:</div>
+    <div id='nome'></div>
+    <div>Foto:</div>
+    <img src="" alt="" id="foto">
+    
+   <script>
+
+       function preenchertela(data){
+         document.getElementById('nome').innerText = data.species.name
+         let foto =  data.sprites.other
+         foto = foto['official-artwork'].front_default
+         document.getElementById('foto').src = foto
+        }
+     
+         function pegarpokemon(){
+            const buscar = document.getElementById('pokemon').value
+            console.log(buscar)
+
+        fetch('https://pokeapi.co/api/v2/pokemon/'+ buscar)
+         .then(response => response.json())
+         .then(data=> {
+             console.log(data.species.name);
+             preenchertela(data);
+         })}
+     
+         
+     </script>
+</body>
+</html>
